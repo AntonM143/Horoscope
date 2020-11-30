@@ -1,0 +1,2 @@
+# Horoscope
+School exercise
