@@ -1,0 +1,16 @@
+#optionMonthHide, #optionDayHide {
+    display: none;
+}
+
+body{
+    margin-top: 10em;
+    display: flex;
+    justify-content: center;
+    background-color: wheat;
+}
+#container{
+    font-size: 2em;
+}
+#input, #save, #update, #delete{
+    font-size: 1em;
+}
