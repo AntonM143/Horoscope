@@ -18,8 +18,8 @@ function horoscope ($inputDate) {
     );
     
     $inputDateArray = explode("-", $inputDate);
-    $month = (int) $inputDateArray[1];
-    $day = (int) $inputDateArray[2];
+    $inputMonth = (int) $inputDateArray[1];
+    $inputDay = (int) $inputDateArray[2];
 
     foreach ($listHoroscope as $key => $value){
         $dates = explode (":", $value);
@@ -27,14 +27,15 @@ function horoscope ($inputDate) {
         $fromDay = (int) $dates[1];
         $toMonth = (int) $dates[2];
         $toDay = (int) $dates[3];
-        if($month == $fromMonth) {
-            if($day >= $fromDay) {
+
+        if($inputMonth == $fromMonth) {
+            if($inputDay >= $fromDay) {
                 return $key;
             }
         }
 
-        if($month == $toMonth) {
-            if($day <= $toDay) {
+        if($inputMonth == $toMonth) {
+            if($inputDay <= $toDay) {
                 return $key;
             }
         }
@@ -43,34 +44,3 @@ function horoscope ($inputDate) {
 }
 
 ?>
-
-
-
-
-
-
-<!-- Väduren: 21 mars – 19 april
-Oxen: 20 april – 20 maj
-Tvillingarna: 21 maj – 21 juni
-Kräftan: 22 juni – 22 juli
-Lejonet: 23 juli – 22 augusti
-Jungfrun: 23 augusti – 22 september
-Vågen: 23 september – 22 oktober
-Skorpionen: 23 oktober – 21 november
-Skytten: 22 november – 21 december
-Stenbocken: 22 december – 19 januari
-Vattumannen: 20 januari – 18 februari
-Fiskarna: 19 februari – 20 mars
-
-01 januari
-02 februari
-03 mars
-04 april
-05 maj
-06 juni
-07 juli
-08 augusti
-09 september
-10 oktober
-11 november
-12 december -->
