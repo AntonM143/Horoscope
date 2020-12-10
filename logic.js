@@ -1,12 +1,15 @@
 window.addEventListener("load", initsite)
+
 //initsite
 function initsite(){
 
 }
+
+
 //func makes requst wants path method body
 async function makeRequest(path, method, body){
     try{
-        const response = await fetch(path, {
+        let response = await fetch(path, {
         method,
         body
         })
@@ -23,11 +26,11 @@ async function viewDate () {
 
 }
 
-//func updateBtn, refresh
+/* //func updateBtn, refresh
 function updateBtn () {
     const update = document.getElementById("input").value
     updateDate(update)
-}
+} */
 
 //func that updates
 async function updateDate (update) {
@@ -36,37 +39,37 @@ async function updateDate (update) {
 
 //func saveBtn, saves
 function saveBtn () {
-    const date = document.getElementById("input").value
-    postDate(date) 
+    let date = document.getElementById("input").value
+    console.log(date)
+    postDate(date)  
 
 }
+saveBtn()
 
 //func that posts
 async function postDate (date){
-    const body = new FormData ()
-    body.set("listHoroscope", date)
+    let body = new FormData ()
+    body.set("date", date)
+    console.log(body)
 
     const response = await makeRequest("./php/addHoroscope.php","POST", body)
     console.log(response)
 }
 
-//func deletebtn, removes 
-function deleteBtn (){
-    const resultH1 = document.getElementById("result")
-    resultH1.innerHTML = ""
-    deleteDate()
-}
 
 //func that deletes
 async function deleteDate (){
     
+    
 }
 
-//func that refreshes the page
-function refresh(){
-    window.location.reload()
+//func that decides if the buttons gonna show or not
+function buttons(buttonOne, buttonTwo, buttonThree){
+    const saveBtn = document.getElementById("saveBtn")
+    const updateBtn = document.getElementById("updateBtn")
+    const deleteBtn = document.getElementById("deleteBtn")
+
+    saveBtn.style.display = buttonOne
+    updateBtn.style.display = buttonTwo
+    deleteBtn.style.display = buttonThree
 }
-let test = fetch("./php/list.php")
-        
-        
-        console.log(test)
