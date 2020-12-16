@@ -1,75 +1,90 @@
-window.addEventListener("load", initsite)
+//all buttons
+const saveButton = document.getElementById("saveButton")
+const updateButton = document.getElementById("updateButton")
+const deleteButton = document.getElementById("deleteButton")
+saveButton.addEventListener("click", save )
+updateButton.addEventListener("click", update)
+deleteButton.addEventListener("click", remove)
 
-//initsite
-function initsite(){
-
-}
 
 
-//func makes requst wants path method body
+//make request
 async function makeRequest(path, method, body){
     try{
-        let response = await fetch(path, {
-        method,
-        body
+        const response = await fetch(path,{
+            method,
+            body
         })
         console.log(response)
         return await response.json()
-        
-    }catch(err) {
+    }catch(err){
         console.log(err)
-    }   
+    }
 }
 
-//func that views
-async function viewDate () {
-
-}
-
-/* //func updateBtn, refresh
-function updateBtn () {
-    const update = document.getElementById("input").value
-    updateDate(update)
-} */
-
-//func that updates
-async function updateDate (update) {
-
-}
-
-//func saveBtn, saves
-function saveBtn () {
+//day
+function getDay(){
     let date = document.getElementById("input").value
-    console.log(date)
-    postDate(date)  
+    let day = date.split('-')
 
+    return parseInt(day[2])
 }
-saveBtn()
+//month
+function getMonth(){
+    let date = document.getElementById("input").value
+    let month = date.split('-')
 
-//func that posts
-async function postDate (date){
-    let body = new FormData ()
-    body.set("date", date)
-    console.log(body)
-
-    const response = await makeRequest("./php/addHoroscope.php","POST", body)
-    console.log(response)
+    return parseInt(month[1])
 }
-
-
-//func that deletes
-async function deleteDate (){
+// save
+async function save (){
     
     
+    let month = getMonth()
+    let day = getDay()
+
+    let body = new FormData()
+    body.set("month", month)
+    body.set("day", day)
+    let collectInput = await makeRequest("./server/addHoroscope.php", "POST", body)
+    /* console.log("Body",body)
+    console.log("inputnumber",inputNumber) */
+    console.log("collectinput",collectInput)
+    /* console.log("day",day)
+    console.log("month",month) */
+    await viewer()
+    
+}
+// update
+async function update (){
+    
+    let month = getMonth()
+    let day = getDay()
+
+    let body = new FormData()
+    body.set("month", month)
+    body.set("day", day)
+    let collectInput = await makeRequest("./server/updateHoroscope.php", "POST", body)
+    /* console.log("Body",body)
+    console.log("inputnumber",inputNumber) */
+    console.log("collectinput",collectInput)
+    /* console.log("day",day)
+    console.log("month",month) */
+    await viewer()
+    
+}
+//delete
+async function remove (){
+    const collectInput = await makeRequest("./server/deleteHoroscope.php", "DELETE")
+    
+    console.log(collectInput)
+
+}
+//view */
+async function viewer (){
+    const saveInput = document.getElementById("result")
+    const collectInput = await makeRequest("./server/viewHoroscope.php", "GET")
+    saveInput.innerHTML = collectInput
+    console.log(collectInput)
 }
 
-//func that decides if the buttons gonna show or not
-function buttons(buttonOne, buttonTwo, buttonThree){
-    const saveBtn = document.getElementById("saveBtn")
-    const updateBtn = document.getElementById("updateBtn")
-    const deleteBtn = document.getElementById("deleteBtn")
-
-    saveBtn.style.display = buttonOne
-    updateBtn.style.display = buttonTwo
-    deleteBtn.style.display = buttonThree
-}

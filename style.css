@@ -14,3 +14,9 @@ body{
 #input, #save, #update, #delete{
     font-size: 1em;
 }
+#result {
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    font-size: 3em;
+}
