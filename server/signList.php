@@ -1,7 +1,7 @@
 <?php
 
 function horoscopeCheck ($month, $day){
-$zodiac = "test";
+$zodiac = " ";
     if($month == 3 && $day >=21 || $month == 4 && $day <=19){
         $zodiac = "Väduren";
     }
